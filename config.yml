@@ -1,0 +1,7 @@
+commands:
+  - name: "/kiepscy"
+    storage: "/images/kiepscy/"
+  - name: "/pepe"
+    storage: "images/pepe/"
+  - name: "/soyjak"
+    storage: "images/soyjak/"
