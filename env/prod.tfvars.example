@@ -1,0 +1,11 @@
+function_name        = "lambda-func-dev"
+runtime              = "python3.10"
+
+# Needed for permission setting
+s3_bucket_project1      = "bucket-project-two"
+s3_bucket_project2    = "bucket-project-one"
+
+telegram_bot_token   = "telegram-bot-token-here"
+
+run_dependency_script = false
+

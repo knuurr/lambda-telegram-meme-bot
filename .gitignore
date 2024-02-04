@@ -1,0 +1,23 @@
+# Serverless files
+.serverless/
+serverless.yml
+
+
+# Env vars
+env/*.tfvars
+
+# pip dependencies and artefacts
+function_code/package
+function_code/*.txt
+function_code/*.yml
+
+
+# TF specific
+.terraform/
+.terraform*
+terraform*
+
+# Other
+_test/
+*.zip
+*.json

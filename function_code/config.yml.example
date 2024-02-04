@@ -1,0 +1,20 @@
+command_not_found_message: |
+  Multiline not found command 🤷‍♂️
+  Overwrites hardcoded message 🚫
+
+
+
+commands:
+    # Example command name, as registered within Telegram bot
+  - name: "/randomimg"
+    # S3 bucket name to fetch from. Remember about IAM permissions
+    storage: "lambda-s3-func-bucket-name"
+    # If "type: image", fetch from S3 bucket
+    type: image
+  - name: "/toast"
+    # Random line from text file will be fetched and returned
+    # File is being looked for within Lambda's filesystem, not remotely
+    file: toasts.txt
+    # Needed if looking for random txt string
+    type: text
+  
