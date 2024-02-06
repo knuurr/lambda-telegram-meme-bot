@@ -9,7 +9,11 @@ import sys
 
 # Custom packages
 # Set up package path
-package_directory = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'package')
+# package_directory = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'package')
+# sys.path.append(package_directory)
+
+# Quickfix for layered dependencies
+package_directory = os.path.join("/opt")
 sys.path.append(package_directory)
 
 

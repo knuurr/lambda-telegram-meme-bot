@@ -16,9 +16,9 @@ variable "iam_role_arn" {
   description = "IAM role ARN for Lambda function"
 }
 
-variable "lambda_zip_path" {
-  description = "Path to .zip file for deployment"
-}
+# variable "lambda_zip_path" {
+#   description = "Path to .zip file for deployment"
+# }
 
 variable "full_webhook_url" {
   description = "Full URL for AWS Webhook - for Telegram auto-bind"

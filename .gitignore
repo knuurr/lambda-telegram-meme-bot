@@ -7,7 +7,7 @@ serverless.yml
 env/*.tfvars
 
 # pip dependencies and artefacts
-function_code/package
+package/**
 function_code/*.txt
 function_code/*.yml
 

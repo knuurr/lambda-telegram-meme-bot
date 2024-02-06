@@ -58,7 +58,8 @@ module "lambda" {
   function_name = "${random_id.id.hex}-function-${var.function_name}"
   runtime       = var.runtime
   iam_role_arn  = "${module.iam.lambda_role_arn}"
-  lambda_zip_path = data.archive_file.lambda_code_archive.output_path
+  # lambda_zip_path = data.archive_file.lambda_code_archive.output_path
+  # dependencies_arn  = "${module.lambda_layer.dependencies_layer_arn}"
   # Tegeram token
   telegram_bot_token = var.telegram_bot_token
   # AWS endpointfull  URL - for token autosetup
@@ -71,29 +72,3 @@ module "cloudwatch_logs" {
   retention_days  = 30
 }
 
-
-# generate ZIP file with deployment for Lambda
-
-data "archive_file" "lambda_code_archive" {
-  # Declare a dependency between null_resource and data block
-  depends_on  = [null_resource.generate_package]
-  type        = "zip"
-  # Zip together handler along with Python deps, other stuff too if needed
-  source_dir  = "${path.root}/function_code"
-  output_path = "${path.root}/lambda_code.zip"
-}
-
-
-# Run local script to generate "package" folder with Python deps
-resource "null_resource" "generate_package" {
-  count = var.run_dependency_script ? 1 : 0  # Conditional execution based on variable
-
-  triggers = {
-    always_run = timestamp()
-  }
-  # Run local script
-  provisioner "local-exec" {
-    command = "${path.root}/install_dependencies.sh"
-    
-  }
-}
