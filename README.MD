@@ -10,7 +10,7 @@ Before deploying the bot, ensure you have the following:
 
 - **AWS Account**: You need an AWS account to deploy the bot using Lambda and S3.
 - **Telegram Account**: Obtain a Telegram account and create a new bot using BotFather. This tutorial assumes basic familiarity with setting up a Telegram bot. If you're unfamiliar with this process, refer to online tutorials for guidance.
-- **At least one S3 bucket**: For fetching images, bot required S3 bucket created, with some images on root of bucket. This is currently handled outside of this stack.
+- **One S3 bucket**, with folders for images: For fetching images, the bot requires a single S3 bucket with folder paths supplied. Provisioning is currently handled outside of this stack. 
 
 
 Also in any case, remember to remove `*.example` suffixes.
@@ -19,7 +19,7 @@ Also in any case, remember to remove `*.example` suffixes.
 
 Everything that's inside `function_code` folder will end up together with function in single zip.
 
-Function relies on `function_code/config.yml` (example present in folder). In short, this config is parsed during function runtime and checked for all possible incoming Telegram commands to handle. Eahc command is bound to location of either text file or S3 bucket for images to fetch from.
+Function relies on `function_code/config.yml` (example present in folder). In short, this config is parsed during function runtime and checked for all possible incoming Telegram commands to handle. Each command is bound to location of either text file or **folder path on S3 bucket** for images to fetch from.
 
 As example, You'll find an example `config.yml` file within that folder. If you wish to check how it works on example,, move `toasts.txt` file from project root to `function_code` folder before deployment and register `/toast` function for your bot from the app itself.
 
@@ -67,12 +67,13 @@ resource "null_resource" "generate_package" {
 
 There you can set function name, Telegram bot token and S3 bucket to fetch from.
 
-Important is to provide names of S3 buckets in here (this is currently handled outside of this stack) which is needed to ensure proper permissions for them.
+It is important to provide the name of the single S3 bucket in this section (provisoning is currently handled outside of this Terraform stack) to ensure proper permissions for it. Besides that, function uses it know from which S3 fetch content from.
+
+
 
 ```hcl
 # Needed for permission setting
-s3_bucket_project1      = "bucket-project-two"
-s3_bucket_project2    = "bucket-project-one"
+s3_bucket_project      = "bucket-project-name"
 ```
 
 

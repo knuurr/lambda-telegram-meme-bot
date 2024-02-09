@@ -7,8 +7,9 @@ command_not_found_message: |
 commands:
     # Example command name, as registered within Telegram bot
   - name: "/randomimg"
-    # S3 bucket name to fetch from. Remember about IAM permissions
-    storage: "lambda-s3-func-bucket-name"
+    # folder path on supplied S3 bucket
+    # "/" after name is important
+    storage: "bucket-folder/"
     # If "type: image", fetch from S3 bucket
     type: image
   - name: "/toast"

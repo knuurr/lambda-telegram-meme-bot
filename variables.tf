@@ -17,7 +17,7 @@ variable "function_name" {
 
 variable "runtime" {
   description = "Python runtime for the Lambda function"
-  default = "python3.10"
+  default = "python3.12"
   type = string
 }
 
@@ -34,12 +34,7 @@ variable "run_dependency_script" {
 
 # S3 Buckets
 
-variable "s3_bucket_project1" {
-  description = "S3 Bucket for Command 1"
-  type = string
-}
-
-variable "s3_bucket_project2" {
-  description = "S3 Bucket for Command 2"
+variable "s3_bucket_project" {
+  description = "S3 Bucket for Project"
   type = string
 }

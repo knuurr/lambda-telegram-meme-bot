@@ -38,8 +38,8 @@ resource "random_id" "id" {
 module "iam" {
   source = "./modules/iam"
   # Required for bucket permissions
-  s3_bucket_name1 = var.s3_bucket_project1
-  s3_bucket_name2 = var.s3_bucket_project2
+  s3_bucket_name = var.s3_bucket_project
+  # s3_bucket_name2 = var.s3_bucket_project
   function_name = "${random_id.id.hex}-function-${var.function_name}"
 }
 
@@ -62,6 +62,7 @@ module "lambda" {
   # dependencies_arn  = "${module.lambda_layer.dependencies_layer_arn}"
   # Tegeram token
   telegram_bot_token = var.telegram_bot_token
+  s3_bucket_name = var.s3_bucket_project
   # AWS endpointfull  URL - for token autosetup
   full_webhook_url = "${module.api-gateway-v2.get_api_gw_url_endpoint}/${random_id.random_path.hex}/"
 }

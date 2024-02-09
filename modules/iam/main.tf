@@ -25,12 +25,12 @@ resource "aws_iam_policy" "lambda_policy" {
       {
         Action   = "s3:ListBucket",
         Effect   = "Allow",
-        Resource = ["arn:aws:s3:::${var.s3_bucket_name1}", "arn:aws:s3:::${var.s3_bucket_name2}"]
+        Resource = ["arn:aws:s3:::${var.s3_bucket_name}"]
       },
       {
         Action   = ["s3:GetObject", "s3:PutObject"],
         Effect   = "Allow",
-        Resource = ["arn:aws:s3:::${var.s3_bucket_name1}/*", "arn:aws:s3:::${var.s3_bucket_name2}/*"]
+        Resource = ["arn:aws:s3:::${var.s3_bucket_name}/*"]
       },
       {
         Action   = ["logs:CreateLogStream", "logs:PutLogEvents"],

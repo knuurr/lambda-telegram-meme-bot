@@ -1,10 +1,3 @@
-# data "archive_file" "lambda_code_archive" {
-#   type        = "zip"
-#   source_dir  = "${path.root}/function_code"
-#   output_path = "${path.root}/lambda_code.zip"
-# }
-
-
 resource "aws_lambda_function" "meme_func" {
   function_name    = var.function_name
   runtime          = var.runtime
@@ -27,6 +20,7 @@ resource "aws_lambda_function" "meme_func" {
     variables = {
       # Telegram token from Botfather
       TELEGRAM_BOT_TOKEN = var.telegram_bot_token
+      S3_BUCKET_NAME = var.s3_bucket_name
       # Webhook for automatic registration with Telegram
       AWS_WEBHOOK_URL = var.full_webhook_url
     }

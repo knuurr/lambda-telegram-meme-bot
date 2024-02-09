@@ -29,6 +29,8 @@ LOGGER.setLevel(logging.INFO)
 
 
 TELEGRAM_BOT_TOKEN = os.environ.get('TELEGRAM_BOT_TOKEN')
+S3_BUCKET_NAME = os.environ.get('S3_BUCKET_NAME')
+
 
 CONFIG_FILE_PATH = 'config.yml'
 
@@ -49,18 +51,18 @@ def load_config():
 
 
 
-def random_image(bucket_name):
+def random_image(bucket_path):
     """Retrieve a random image from the specified S3 bucket."""
     # Inefficient - the larger bucket, the longer return time
     # However it works for now
-    response = S3_CLIENT.list_objects_v2(Bucket=bucket_name)
+    response = S3_CLIENT.list_objects_v2(Bucket=S3_BUCKET_NAME, Delimiter='/', Prefix=bucket_path)
     # print(response)
     
     if 'Contents' in response:
         objects = response['Contents']
         random_object = random.choice(objects)
         object_key = random_object['Key']
-        response = S3_CLIENT.get_object(Bucket=bucket_name, Key=object_key)
+        response = S3_CLIENT.get_object(Bucket=S3_BUCKET_NAME, Key=object_key)
         image_data = response['Body'].read()
         # https://boto3.amazonaws.com/v1/documentation/api/latest/guide/s3-example-download-file.html
 
